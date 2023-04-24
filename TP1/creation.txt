@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS clients (
+  
+  Id_Client varchar(40) DEFAULT NULL,
+ Client varchar(40) DEFAULT NULL,
+ Adresse_rue varchar(40) DEFAULT NULL,
+ Code_Postal varchar(40) DEFAULT NULL,
+ Ville varchar(40) DEFAULT NULL,
+ numero_telephone varchar(40) DEFAULT NULL,
+ Titre varchar(40) DEFAULT NULL,
+ Prenom varchar(40) DEFAULT NULL,
+ Nom varchar(40) DEFAULT NULL
+  
+)

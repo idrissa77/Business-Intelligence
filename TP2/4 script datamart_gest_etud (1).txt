@@ -1,0 +1,85 @@
+
+
+--
+-- Base de données: `datamart_gest_etud`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `annee`
+--
+
+CREATE TABLE IF NOT EXISTS `annee` (
+  `A_ID` int(11) NOT NULL,
+  PRIMARY KEY (`A_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `module`
+--
+
+CREATE TABLE IF NOT EXISTS `module` (
+  `M_ID` int(11) NOT NULL,
+  `M_NOM` varchar(20) DEFAULT NULL,
+  `M_COEF` int(11) DEFAULT NULL,
+  PRIMARY KEY (`M_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `resultat`
+--
+
+CREATE TABLE IF NOT EXISTS `resultat` (
+  `A_ID` int(11) DEFAULT NULL,
+  `SEXE` varchar(20) DEFAULT NULL,
+  `V_ID` int(11) DEFAULT NULL,
+  `M_ID` int(11) DEFAULT NULL,
+  `EXM` int(11) DEFAULT NULL,
+  `TD` int(11) DEFAULT NULL,
+  `TP` int(11) DEFAULT NULL,
+  KEY `FK_RESULTAT_REFERENCE_ANNEE` (`A_ID`),
+  KEY `FK_RESULTAT_REFERENCE_SEXE` (`SEXE`),
+  KEY `FK_RESULTAT_REFERENCE_VILLE` (`V_ID`),
+  KEY `FK_RESULTAT_REFERENCE_MODULE` (`M_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sexe`
+--
+
+CREATE TABLE IF NOT EXISTS `sexe` (
+  `SEXE` varchar(20) NOT NULL,
+  PRIMARY KEY (`SEXE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ville`
+--
+
+CREATE TABLE IF NOT EXISTS `ville` (
+  `V_ID` int(11) NOT NULL,
+  `V_NOM` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`V_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `resultat`
+--
+ALTER TABLE `resultat`
+  ADD CONSTRAINT `FK_RESULTAT_REFERENCE_ANNEE` FOREIGN KEY (`A_ID`) REFERENCES `annee` (`A_ID`),
+  ADD CONSTRAINT `FK_RESULTAT_REFERENCE_MODULE` FOREIGN KEY (`M_ID`) REFERENCES `module` (`M_ID`),
+  ADD CONSTRAINT `FK_RESULTAT_REFERENCE_SEXE` FOREIGN KEY (`SEXE`) REFERENCES `sexe` (`SEXE`),
+  ADD CONSTRAINT `FK_RESULTAT_REFERENCE_VILLE` FOREIGN KEY (`V_ID`) REFERENCES `ville` (`V_ID`);
